@@ -35,17 +35,6 @@ git clone https://github.com/Alexkon30/react-google-books.git
 
 npm i
 
-
-```
-
-- Создать файл `config.js` в директории проекта `src` для хранения Google Books API key
-
-```js
-const settings = {
-  key: 'key',
-};
-
-export default settings;
 ```
 
 - Запустить приложение
