@@ -2,8 +2,17 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const BookCard = ({ book }) => {
+
   return (
-    <Link to={`/book/${book.id}`} className='col-md-6 col-xl-4 p-2'>
+    <Link
+      to={`/book/${book.id}`}
+      className='col-md-6 col-xl-4 p-2'
+    // onClick={() => {
+    //   console.log(book.volumeInfo)
+    //   MainStore.setBook(book)
+
+    // }}
+    >
       <div className="h-100 row m-0 bg-success p-2 text-white bg-opacity-75 rounded-3 bookCard">
         <div className="col w-25">
           <img src={book.volumeInfo.imageLinks?.thumbnail} alt="Title page" />

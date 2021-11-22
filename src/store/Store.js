@@ -5,7 +5,14 @@ class Store {
     totalItems: 0,
     items: []
   }
-  book = {}
+  book = {
+    volumeInfo: {
+      imageLinks: {},
+      categories: [],
+      authors: [],
+      description: ''
+    }
+  }
   category = 'All'
   sorting = 'relevance'
   isLoad = false
@@ -66,11 +73,14 @@ class Store {
     return this.search + subject + order + length
   }
 
-  get imgLink() {
-    let imageLinks = this.book.volumeInfo?.imageLinks
-    if (imageLinks === undefined) return;
-    return imageLinks.extraLarge ?? imageLinks.large ?? imageLinks.medium ?? imageLinks.small ?? imageLinks.thumbnail ?? imageLinks.smallThumbnail
-  }
+  // get imgLink() {
+  //   console.log(this.book)
+
+  //   let imageLinks = this.book.volumeInfo?.imageLinks
+  //   console.log(imageLinks)
+  //   if (imageLinks === undefined) return;
+  //   return imageLinks.extraLarge ?? imageLinks.large ?? imageLinks.medium ?? imageLinks.small ?? imageLinks.thumbnail ?? imageLinks.smallThumbnail
+  // }
 
 
 }

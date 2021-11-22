@@ -12,7 +12,7 @@ const MainStore = new Store()
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="App min-vh-100 border">
       <GlobalContext.Provider value={{
         MainStore,
       }}>

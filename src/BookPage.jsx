@@ -14,32 +14,30 @@ const BookPage = observer(() => {
     fetch(`https://www.googleapis.com/books/v1/volumes/${id}`)
       .then(data => data.json())
       .then(newdata => {
-        console.log(newdata)
         MainStore.setBook(newdata)
         MainStore.setLoad(false)
       })
     // eslint-disable-next-line
   }, [])
 
-  // let imageLinks = MainStore.book.volumeInfo.imageLinks
-  // let imageLink = imageLinks.extraLarge ?? imageLinks.large ?? imageLinks.medium ?? imageLinks.small ?? imageLinks.thumbnail ?? imageLinks.smallThumbnail
-
-
-
   return (
-    <div className="container">
+    <div className="container border p-3">
       {MainStore.isLoad
         ? <Loader />
         : <>
+          <div className="row">
+            <div className="col-4 p-3">
+              <img src={MainStore.book.volumeInfo.imageLinks?.thumbnail} alt="Title page" className='w-100' />
+            </div>
+            <div className="col-8 p-3">
+              <p className='fs-6 mb-3 text-secondary'>{MainStore.book.volumeInfo.categories}</p>
+              <p className='fs-2 fw-bold'>{MainStore.book.volumeInfo.title}</p>
+              <p className='text-white bg-success'>{MainStore.book.volumeInfo.authors?.join(', ')}</p>
+              <p className='p-2 border ' dangerouslySetInnerHTML={{ __html: MainStore.book.volumeInfo.description }}></p>
+            </div>
+          </div>
         </>}
-      <div className="row">
-        <div className="col">
-          <img src={MainStore.imgLink} alt="Title page" />
-        </div>
-        <div className="col">
 
-        </div>
-      </div>
     </div>
   )
 })
