@@ -5,6 +5,7 @@ class Store {
     totalItems: 0,
     items: []
   }
+
   book = {
     volumeInfo: {
       imageLinks: {},
@@ -72,17 +73,6 @@ class Store {
 
     return this.search + subject + order + length
   }
-
-  // get imgLink() {
-  //   console.log(this.book)
-
-  //   let imageLinks = this.book.volumeInfo?.imageLinks
-  //   console.log(imageLinks)
-  //   if (imageLinks === undefined) return;
-  //   return imageLinks.extraLarge ?? imageLinks.large ?? imageLinks.medium ?? imageLinks.small ?? imageLinks.thumbnail ?? imageLinks.smallThumbnail
-  // }
-
-
 }
 
 export default Store
