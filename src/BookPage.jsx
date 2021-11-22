@@ -26,10 +26,10 @@ const BookPage = observer(() => {
         ? <Loader />
         : <>
           <div className="row">
-            <div className="col-4 p-3">
+            <div className="col-md-4 col-12 p-3">
               <img src={MainStore.book.volumeInfo.imageLinks?.thumbnail} alt="Title page" className='w-100' />
             </div>
-            <div className="col-8 p-3">
+            <div className="col-md-8 col-12 p-3">
               <p className='fs-6 mb-3 text-secondary'>{MainStore.book.volumeInfo.categories}</p>
               <p className='fs-2 fw-bold'>{MainStore.book.volumeInfo.title}</p>
               <p className='text-white bg-success'>{MainStore.book.volumeInfo.authors?.join(', ')}</p>

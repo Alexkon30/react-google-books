@@ -32,7 +32,7 @@ const Header = observer(() => {
       <h1 className='text-center text-white fw-bold'>Search for books</h1>
 
       <div className="row justify-content-center">
-        <div className="col-4">
+        <div className="col-md-8 col-lg-6 col-10">
           <div className="input-group mb-3">
             <input
               type="text"
@@ -63,7 +63,7 @@ const Header = observer(() => {
       </div>
 
       <div className="row justify-content-center mt-3">
-        <div className="col-2">
+        <div className="col-sm-4 col-md-3 col-lg-3 col-7 mb-2">
           <select
             className="form-select"
             defaultValue='All'
@@ -83,7 +83,7 @@ const Header = observer(() => {
           </select>
         </div>
 
-        <div className="col-2">
+        <div className="col-sm-4 col-md-3 col-lg-3 col-7">
           <select
             className="form-select"
             defaultValue='relevance'
