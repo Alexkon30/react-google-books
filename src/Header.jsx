@@ -1,18 +1,29 @@
 import './style.css'
-import React, { useContext, useRef } from 'react'
+import React, { useContext } from 'react'
 import GlobalContext from './context/GlobalContext'
 import { observer } from 'mobx-react-lite'
+import { Link } from 'react-router-dom'
+import settings from './config.js'
 
 
 const Header = observer(() => {
   const { MainStore } = useContext(GlobalContext)
-  const searchRef = useRef()
 
-  const handleSearch = () => {
-    // console.log(searchRef.current.value)
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchRef.current.value}`)
+  const handleSearch = (searchOptions) => {
+    MainStore.setLoad(true)
+    let key = `&key=${settings.key}`
+
+
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchOptions}` + key)
       .then(data => data.json())
-      .then(newdata => MainStore.setBooks(newdata))
+      .then(newdata => {
+        MainStore.setBooks(newdata)
+
+        setTimeout(() => {
+          MainStore.setAbility(true)
+          MainStore.setLoad(false)
+        }, 2000)
+      })
   }
 
 
@@ -23,44 +34,73 @@ const Header = observer(() => {
       <div className="row justify-content-center">
         <div className="col-4">
           <div className="input-group mb-3">
-            <input type="text" className="form-control" placeholder="Book title" ref={searchRef} />
-            <button
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Book title"
+              value={MainStore.seacrh}
+              onChange={(e) => {
+                MainStore.setAbility(false)
+                MainStore.setSearch(e.target.value)
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSearch(MainStore.options)
+                }
+              }}
+            />
+            <Link
               className="btn btn-success"
-              type="button"
+              type="submit"
               id="button-addon2"
-              onClick={handleSearch}
+              onClick={() => handleSearch(MainStore.options)}
+              to='/'
             >
               <i className="bi bi-search"></i>
-            </button>
+            </Link>
           </div>
         </div>
-
       </div>
 
       <div className="row justify-content-center mt-3">
         <div className="col-2">
-          <select className="form-select" defaultValue={1}>
+          <select
+            className="form-select"
+            defaultValue='All'
+            onChange={(e) => {
+              MainStore.resetIndex()
+              MainStore.setAbility(false)
+              MainStore.setCategory(e.target.value)
+            }}>
             <option value="0" disabled>Categories</option>
-            <option value="1">All</option>
-            <option value="2">Art</option>
-            <option value="3">Biography</option>
-            <option value="4">Computers</option>
-            <option value="5">History</option>
-            <option value="6">Medical</option>
-            <option value="7">Poetry</option>
-
-
+            <option value="All">All</option>
+            <option value="Art">Art</option>
+            <option value="Biography">Biography</option>
+            <option value="Computers">Computers</option>
+            <option value="History">History</option>
+            <option value="Medical">Medical</option>
+            <option value="Poetry">Poetry</option>
           </select>
         </div>
+
         <div className="col-2">
-          <select className="form-select" defaultValue={1}>
-            <option value="1">Relevance</option>
-            <option value="2">Newest</option>
+          <select
+            className="form-select"
+            defaultValue='relevance'
+            onChange={(e) => {
+              MainStore.resetIndex()
+              MainStore.setAbility(false)
+              MainStore.setSort(e.target.value)
+            }
+            }>
+            <option value="relevance">Relevance</option>
+            <option value="newest">Newest</option>
           </select>
         </div>
       </div>
 
-    </header>
+
+    </header >
   )
 })
 

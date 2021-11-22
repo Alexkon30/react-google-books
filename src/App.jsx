@@ -1,8 +1,10 @@
-import Header from './Header';
-import Body from './Body';
-import Store from './store/Store';
-import GlobalContext from './context/GlobalContext';
-// import { observer } from 'mobx-react-lite'
+import React from 'react'
+import Header from './Header'
+import Body from './Body'
+import BookPage from './BookPage'
+import Store from './store/Store'
+import GlobalContext from './context/GlobalContext'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 
 
 const MainStore = new Store()
@@ -14,8 +16,14 @@ const App = () => {
       <GlobalContext.Provider value={{
         MainStore,
       }}>
-        <Header />
-        <Body />
+        <Router>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={Body} />
+            <Route path="/book/:id" component={BookPage} />
+            <Redirect to="/" />
+          </Switch>
+        </Router>
       </GlobalContext.Provider>
     </div>
   );
