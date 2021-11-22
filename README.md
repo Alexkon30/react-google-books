@@ -1,5 +1,7 @@
 # React Google Books
 
+[Протестировать приложение](https://alexkon30.github.io/react-google-books/)
+
 ## Основные возможности приложения
 
 - Поиск книг
